@@ -3,8 +3,14 @@
 # Check for CUDA availability
 python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
 
-# If you want to run the training automatically
+# Run the training
 python train.py
 
-# Or, to get an interactive shell
-exec "$@"
+# After training, copy artifacts to a mounted volume
+if [ -d "/workspace/pytorch-ocr/outputs" ]; then
+    echo "Training complete! Copying artifacts to mounted volume..."
+    cp -r /workspace/pytorch-ocr/outputs /artifacts
+    cp -r /workspace/pytorch-ocr/logs /artifacts
+fi
+
+echo "Copying complete!"
