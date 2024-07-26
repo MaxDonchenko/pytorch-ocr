@@ -20,6 +20,12 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+# Copy the conversion script
+COPY convert_pth_to_onnx.py /workspace/pytorch-ocr/
+
+# Copy the trained model (if exists locally)
+COPY docker-artifacts/logs/crnn.pth /workspace/pytorch-ocr/trained_model/crnn.pth
+
 # Create an entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

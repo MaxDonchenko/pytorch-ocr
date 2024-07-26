@@ -25,7 +25,7 @@ model = CRNN(
 )
 
 # Load the trained weights
-weights_path = "logs-2024-02-18-data-5k-no-errors-epochs-20/crnn.pth"
+weights_path = "docker-artifacts/logs/crnn.pth"
 model.load_state_dict(torch.load(weights_path, map_location=torch.device('cpu')))
 model.eval()
 
