@@ -1,6 +1,9 @@
-#FROM python:3.8-slim
+# Use this image for torch->onnx conversion
+# FROM python:3.8-slim
+
 # https://docs.nvidia.com/deeplearning/frameworks/pytorch-release-notes/rel_22-01.html#rel_22-01
 # This image is very large (14.8GB)
+# Use this image for training
 FROM nvcr.io/nvidia/pytorch:23.05-py3
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -24,7 +27,7 @@ COPY . .
 COPY convert_pth_to_onnx.py /workspace/pytorch-ocr/
 
 # Copy the trained model (if exists locally)
-COPY docker-artifacts/logs/crnn.pth /workspace/pytorch-ocr/trained_model/crnn.pth
+COPY logs/crnn.pth /workspace/pytorch-ocr/logs/crnn.pth
 
 # Create an entrypoint script
 COPY entrypoint.sh /entrypoint.sh

@@ -6,3 +6,4 @@ logs*/
 outputs/
 venv/
 crnn.onnx
+docker-artifacts/
