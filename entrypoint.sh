@@ -78,5 +78,21 @@ echo "Copying complete at $(date)"
 echo "Listing files in /artifacts:"
 list_directory "/artifacts"
 
+# Test the inference
+echo "Starting inference at $(date)"
+INFERENCE_RESULT=$(python /workspace/pytorch-ocr/inference_with_onnx.py /workspace/pytorch-ocr/test-image-2.png)
+echo "Finished inference at $(date)"
+
+# Test the result
+EXPECTED_RESULT="axkaah"
+if [ "$INFERENCE_RESULT" = "$EXPECTED_RESULT" ]; then
+    echo "Test PASSED: Inference result matches expected result"
+else
+    echo "Test FAILED: Inference result does not match expected result"
+    echo "Expected: $EXPECTED_RESULT"
+    echo "Got: $INFERENCE_RESULT"
+    exit 1
+fi
+
 # Keep the container running
 tail -f /dev/null
