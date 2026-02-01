@@ -1,7 +1,6 @@
 logs-2023*
 logs-2024*
-__pycache__/
-utils/__pycache__/
+**/__pycache__/
 
 # docker-artifacts/ are the artifacts that were copied from the docker container
 # to the host machine. They are not needed in the docker container again.

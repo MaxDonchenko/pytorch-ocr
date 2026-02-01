@@ -26,11 +26,10 @@ COPY . .
 # Copy the conversion script
 COPY convert_pth_to_onnx.py /workspace/pytorch-ocr/
 
-# Copy the trained model (if exists locally)
-COPY logs/crnn.pth /workspace/pytorch-ocr/logs/crnn.pth
 
 # Create an entrypoint script
 COPY entrypoint.sh /entrypoint.sh
+RUN sed -i 's/\r$//' /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
