@@ -9,7 +9,7 @@ processing:
 training:
   lr: 3e-4
   batch_size: 16
-  num_workers: 8
+  num_workers: 0
   num_epochs: 100
 
 bools:
