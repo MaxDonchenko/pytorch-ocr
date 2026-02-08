@@ -63,11 +63,7 @@ def build_dataloaders(cfg):
     targets = [[c for c in x] for x in original_targets]
     targets_flat = [c for clist in targets for c in clist]
     label_encoder = preprocessing.LabelEncoder()
-    # Use static classes to ensure consistency between training and inference
-    import static_variables
-    # Exclude the blank token '∅' at index 0 as it's not in the dataset filenames
-    fixed_classes = static_variables.classes[1:]
-    label_encoder.fit(fixed_classes)
+    label_encoder.fit(targets_flat)
     targets_encoded = [label_encoder.transform(x) for x in targets]
     targets_encoded = np.array(targets_encoded)
     targets_encoded = targets_encoded + 1

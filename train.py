@@ -55,6 +55,8 @@ def run_training(cfg):
     valid_loss_data = []
     accuracy_data = []
 
+    best_model_wts = None
+
     # This is the same list of characters from dataset, but with the '∅' token
     # which denotes blank for ctc, or pad for cross_entropy
     training_classes = ["∅"]
@@ -115,7 +117,12 @@ def run_training(cfg):
 
     # 4. Save model + logging and plotting
     logger.info(f"Finished training. Best Accuracy was: {(best_acc*100):.2f}%")
-    model.load_state_dict(best_model_wts)
+    logger.info(f"Finished training. Best Accuracy was: {(best_acc*100):.2f}%")
+    if best_model_wts is not None:
+        model.load_state_dict(best_model_wts)
+    else:
+        logger.info("No best model weights found (accuracy was 0.0 or did not improve). Saving last model state.")
+
     torch.save(model.state_dict(), cfg.paths.save_model_as)
     logger.info(f"Saving model on {cfg.paths.save_model_as}\nTraining time: {datetime.now()-start}")
     plot_losses(train_loss_data, valid_loss_data)
