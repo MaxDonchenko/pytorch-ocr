@@ -50,7 +50,13 @@ In case you don't want to install python, CUDA, torch and the rest of tools manu
 
 ```
 docker build -t pytorch-ocr .
-docker run --rm --gpus all -v ${PWD}/docker-artifacts:/artifacts --name ocr-training pytorch-ocr
+docker run --rm --gpus all -v ${PWD}/docker-artifacts:/artifacts pytorch-ocr
+```
+
+**Note for Windows Git Bash users:**
+Git Bash (MSYS2) may convert paths incorrectly (creating folders like `docker-artifacts;C`). To avoid this, use:
+```bash
+MSYS_NO_PATHCONV=1 docker run --rm --gpus all -v "$(pwd -W)/docker-artifacts:/artifacts" pytorch-ocr
 ```
 
 Beware that the Nvidia base image with CUDA is massive (10+ GB).

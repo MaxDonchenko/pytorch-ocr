@@ -94,5 +94,5 @@ else
     exit 1
 fi
 
-# Keep the container running
-tail -f /dev/null
+# Container will exit now
+exit 0
